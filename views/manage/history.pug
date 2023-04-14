@@ -1,0 +1,59 @@
+extends ../layout/index 
+block content 
+
+    
+    h2(class="text-center py-5 font-extrabold text-2xl") History
+
+    //- Desktopy
+    if outputs.length > 0
+        table(class="mx-auto rounded-lg shadow hidden xl:table") 
+            thead(class="bg-slate-900 border-b-2 border-gray-200")
+                tr
+                    th(class="p-3 text-sm font-semibold text-white") Vehicle
+                    th(class="p-3 text-sm font-semibold text-white") Plate
+                    th(class="p-3 text-sm font-semibold text-white") Petition
+                    th(class="p-3 text-sm font-semibold text-white") Output 
+                    th(class="p-3 text-sm font-semibold text-white") Arrived
+                    th(class="p-3 text-sm font-semibold text-white") Status
+            tbody(class="divide-y divide-gray-100")
+                each output in outputs  
+                    tr(class="bg-gray-50 text-center") 
+                        td(class="w-40 p-3 text-sm text-gray-700 whitespace-nowrap")=output.vehicle
+                        td(class="w-24 p-3 text-sm text-gray-700 uppercase whitespace-nowrap")=output.plate 
+                        td(class="w-40 p-3 text-sm text-gray-700 whitespace-nowrap")=output.petition
+                        td(class="w-40 p-3 text-sm text-gray-700 whitespace-nowrap")=output.output
+                        td(class="w-40 p-3 text-sm text-gray-700 whitespace-nowrap")=output.arrived
+                        td(class=`w-20 px-2 text-sm text-white bg-red-600 text-center font-bold capitalize`)=output.status
+                    
+            //- Movile device
+            ul(class="xl:hidden flex flex-col items-center")
+                each output in outputs
+                    li(class="border rounded-lg w-72 sm:w-96 py-8 px-5 space-y-3 mb-5")
+
+                        div(class="flex justify-between items-center flex-wrap")
+                            h3(class="font-extrabold text-blue-600") Vehicle 
+                            p(class="text-sm text-gray-500")=output.vehicle
+
+                        div(class="flex justify-between items-center flex-wrap")
+                            h3(class="font-extrabold text-blue-600 uppercase") Plate 
+                            p(class="text-sm text-gray-500")=output.plate
+
+                        div(class="flex justify-between items-center flex-wrap")
+                            h3(class="font-extrabold text-blue-600") Petition 
+                            p(class="text-sm text-gray-500")=output.petition
+
+                        div(class="flex justify-between items-center flex-wrap")
+                            h3(class="font-extrabold text-blue-600") Output 
+                            p(class="text-sm text-gray-500")=output.output
+
+                        div(class="flex justify-between items-center flex-wrap")
+                            h3(class="font-extrabold text-blue-600") Arrived 
+                            p(class="text-sm text-gray-500")=output.arrived
+
+                        div(class="flex justify-between items-center flex-wrap")
+                            h3(class="font-extrabold text-blue-600") Status 
+                            p(class=`text-sm bg-red-600 text-white px-3 py-1 rounded-full capitalize`)=output.status
+    else 
+        p(class="text-center") No history
+block scripts
+    script(src="/js/aside.js") 

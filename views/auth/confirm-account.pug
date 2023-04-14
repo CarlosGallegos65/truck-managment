@@ -1,0 +1,14 @@
+extends ../layout/index 
+block content 
+    div(class="container max-w-md mx-auto px-2")
+
+        h1(class="text-3xl my-8 font-extrabold text-center") Truck 
+            span(class="font-normal") Management
+
+        div(class="max-w-md mx-auto my-10")
+            if error             
+                p(class="bg-red-600 text-white uppercase text-xs text-center p-2 mb-1 font-bold")=msg
+            else
+                p(class="bg-green-600 text-white uppercase text-xs text-center p-2 mb-1 font-bold")=msg
+
+            a(href="/auth/login" class="block mt-5 text-center uppercase") Log In

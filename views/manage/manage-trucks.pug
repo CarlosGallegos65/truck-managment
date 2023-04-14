@@ -1,0 +1,65 @@
+extends ../layout/index 
+block styles
+    meta(name="csrf-token" content=csrfToken)
+block content 
+
+    h2(class="text-center py-5 font-extrabold text-2xl") Manage Trucks
+    if trucks.length > 0
+        //- Desktopy
+        div(id="trucks")
+            table(class="w-10/12 mx-auto rounded-lg shadow hidden xl:table") 
+                thead(class="bg-slate-900 border-b-2 border-gray-200")
+                    tr 
+                        th(class="p-3 text-sm font-semibold text-white") Brand
+                        th(class="p-3 text-sm font-semibold text-white") Model
+                        th(class="p-3 text-sm font-semibold text-white") Year
+                        th(class="p-3 text-sm font-semibold text-white") Plate
+                        th(class="p-3 text-sm font-semibold text-white") Options
+                tbody(class="divide-y divide-gray-100") 
+                    
+                    each truck in trucks 
+                        tr(class="bg-gray-50 text-center") 
+                            td(class="w-40 p-3 text-sm text-gray-700 whitespace-nowrap")=truck.brand 
+                            td(class="w-40 p-3 text-sm text-gray-700 whitespace-nowrap")=truck.model
+                            td(class="w-40 p-3 text-sm text-gray-700 whitespace-nowrap")=truck.year
+                            td(class="w-24 p-3 text-sm text-gray-700 uppercase whitespace-nowrap")=truck.plate
+                            td(class="flex gap-2 items-center justify-center px-2")
+                                a(href="#" id="btnUpdate" data-id=`${truck.id}` class="w-24 text-sm text-green-600 uppercase border border-green-600 py-1 px-2 rounded-md") Update 
+                                a(href="#" id="btnDelete" data-id=`${truck.id}` class="w-24 text-sm text-red-600 uppercase border border-red-600 py-1 px-2 rounded-md") Delete
+
+
+                //- Movile device
+                ul(class="xl:hidden flex flex-col items-center")
+                    each truck in trucks 
+                        li(class="border rounded-lg w-72 sm:w-96 py-8 px-5 space-y-3 mb-5")
+
+                            div(class="flex justify-between items-center flex-wrap")
+                                h3(class="font-extrabold text-blue-600") Brand
+                                p(class="text-sm text-gray-500")=truck.brand 
+
+                            div(class="flex justify-between items-center flex-wrap")
+                                h3(class="font-extrabold text-blue-600") Model 
+                                p(class="text-sm text-gray-500")=truck.model
+
+                            div(class="flex justify-between items-center flex-wrap")
+                                h3(class="font-extrabold text-blue-600") Year 
+                                p(class="text-sm text-gray-500")=truck.year 
+
+                            div(class="flex justify-between items-center flex-wrap")
+                                h3(class="font-extrabold text-blue-600") Plate 
+                                p(class="text-sm text-gray-500 uppercase")=truck.plate
+
+                            div(class="flex justify-between items-center flex-wrap")
+                                h3(class="font-extrabold text-blue-600") Options 
+                                
+                                div(class="w-full flex justify-between items-center p-3") 
+                                    a(href="#" id="btnUpdate" data-id=`${truck.id}` class="text-center w-24 text-sm text-green-600 uppercase border border-green-600 py-1 px-2 rounded-md") Update 
+                                    a(href="#" id="btnDelete" data-id=`${truck.id}` class="text-center w-24 text-sm text-red-600 uppercase border border-red-600 py-1 px-2 rounded-md") Delete
+    else 
+        p(class="text-center") No trucks yet
+                    
+
+block scripts
+    script(src="/js/aside.js") 
+    script(src="/js/deleteTruck.js") 
+    script(src="/js/updateTruck.js") 

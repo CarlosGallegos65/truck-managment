@@ -6,7 +6,7 @@ const formatDate = (date) => {
         day: 'numeric', hour: 'numeric', minute: 'numeric'
     };
     
-    date = date.toLocaleDateString('es-MX', options);
+    date = new Intl.DateTimeFormat('es-MX', options, {timeZone: "America/Mexico_City" }).format(date)
 
     return date;
 }

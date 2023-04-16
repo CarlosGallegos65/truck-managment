@@ -1,6 +1,6 @@
 
 const formatDate = (date) => {  
-    let newDate = date.toLocaleString("es-MX", {timeZone: "America/Mexico_City"});
+    const newDate = date.toLocaleString("es-MX", date.getTimezoneOffset());
     return newDate;
 }
 

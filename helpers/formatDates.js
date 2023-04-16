@@ -6,7 +6,7 @@ const formatDate = (date) => {
         day: 'numeric', hour: 'numeric', minute: 'numeric'
     };
     
-    date = date.toLocaleDateString('mx', options);
+    date = date.toLocaleDateString('mx-MX', options);
 
     return date;
 }

@@ -25,6 +25,7 @@ const history = async (req, res) => {
     const finishedOutputs = outputs.map(obj => {
         const {vehicle, plate, petition, output, arrived, status} = obj;
                 const newData = {
+                    sectionTitle: 'History',
                     vehicle,
                     plate,
                     petition: formatDate(petition),
@@ -37,6 +38,7 @@ const history = async (req, res) => {
     });
 
     res.render('manage/history', {
+        sectionTitle: 'History',
         title: 'History',
         csrfToken: req.csrfToken(),
         session,
@@ -68,6 +70,7 @@ const outputs = async (req, res) => {
     });
 
     res.render('manage/manage-outputs', {
+        sectionTitle: 'Manage',
         title: 'Outputs',
         csrfToken: req.csrfToken(),
         session,
@@ -83,6 +86,7 @@ const outputsForm = async (req, res) => {
     const trucks = await Truck.find({user_id: session.id, available: true}, '-user_id');
 
     res.render('manage/add-output', {
+        sectionTitle: 'Manage',
         title: 'Add Output',
         csrfToken: req.csrfToken(),
         session,
@@ -105,6 +109,7 @@ const addOutput = async (req, res) => {
     // Vehicle is required
     if(!errors.isEmpty()) {
         return res.render('manage/add-output', {
+            sectionTitle: 'Manage',
             title: 'Add Output',
             csrfToken: req.csrfToken(),
             errors: errors.array(),
@@ -118,6 +123,7 @@ const addOutput = async (req, res) => {
     // If the truck doesn't exists
     if(!truck) {
         return res.render('manage/add-output', {
+            sectionTitle: 'Manage',
             title: 'Add Output',
             csrfToken: req.csrfToken(),
             errors: [{msg: 'Doesn\'t exists this truck'}],
@@ -151,6 +157,7 @@ const addOutput = async (req, res) => {
 
     } catch (error) {
         return res.render('manage/add-output', {
+            sectionTitle: 'Manage',
             title: 'Add Output',
             csrfToken: req.csrfToken(),
             errors: [{msg: error}],
@@ -165,6 +172,7 @@ const trucksForm = (req, res) => {
     const {_token} = req.cookies;
 
     res.render('manage/add-truck', {
+        sectionTitle: 'Trucks',
         title: 'Add Truck',
         csrfToken: req.csrfToken(),
         session: jwt.verify(_token, process.env.JWT_SECRET)
@@ -180,6 +188,7 @@ const trucks = async (req, res) => {
         const trucks = await Truck.find({user_id: session.id});
 
         res.render('manage/manage-trucks', {
+            sectionTitle: 'Trucks',
             title: 'Trucks',
             csrfToken: req.csrfToken(),
             session,
@@ -202,6 +211,7 @@ const addTruck = async (req, res) => {
 
     if(!errors.isEmpty()) {
         return res.render('manage/add-truck', {
+            sectionTitle: 'Trucks',
             title: 'Add Truck',
             csrfToken: req.csrfToken(),
             errors: errors.array(),
@@ -213,6 +223,7 @@ const addTruck = async (req, res) => {
 
     if(truck) {
         return res.render('manage/add-truck', {
+            sectionTitle: 'Trucks',
             title: 'Add Truck',
             csrfToken: req.csrfToken(),
             errors: [{msg: 'This plate is alredy registered'}],
@@ -287,6 +298,7 @@ const profile = async (req, res) => {
     const {_token} = req.cookies;
 
     res.render('manage/profile', {
+        sectionTitle: 'User',
         title: 'Profile',
         csrfToken: req.csrfToken(),
         session: jwt.verify(_token, process.env.JWT_SECRET)
@@ -326,6 +338,7 @@ const updateProfile = async (req, res) => {
 
     if(!errors.isEmpty()) {
         return res.render('manage/profile', {
+            sectionTitle: 'User',
             title: 'Profile',
             csrfToken: req.csrfToken(),
             errors: errors.array(),

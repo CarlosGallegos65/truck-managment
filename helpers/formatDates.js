@@ -1,8 +1,7 @@
 
 const formatDate = (date) => {  
-    date = date.toLocaleString("es-MX", {timeZone: "America/Mexico_City"});
-
-    return date;
+    let newDate = date.toLocaleString("es-MX", {timeZone: "America/Mexico_City"});
+    return newDate;
 }
 
 export {
